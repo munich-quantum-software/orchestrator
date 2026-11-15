@@ -1,0 +1,65 @@
+# Copyright (c) 2026 Munich Quantum Software Company GmbH
+# All rights reserved.
+#
+# SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+#
+# Licensed under the Apache License v2.0 with LLVM Exceptions.
+# See https://llvm.org/LICENSE.txt for license information.
+
+# Compile for live provider metadata and run the result on DDSIM. The check
+# opens provider devices to read their metadata and never submits provider jobs.
+name: Provider targets
+on:
+  schedule:
+    - cron: "23 4 * * 1"
+  workflow_dispatch:
+permissions: {}
+concurrency:
+  group: ${{ github.workflow }}
+jobs:
+  targets:
+    if: github.event.repository.private == false
+    runs-on: ubuntu-26.04
+    timeout-minutes: 180
+    environment: provider-targets
+    permissions:
+      contents: read
+      id-token: write # Amazon Braket role through GitHub OIDC
+    env:
+      IMAGE: mqsc-orchestrator:ci
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+      - name: Build the cluster image
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: deploy/slurm
+          build-contexts: orchestrator=.
+          tags: ${{ env.IMAGE }}
+          load: true
+          cache-from: type=gha
+      - name: Assume the Amazon Braket metadata role
+        uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+        with:
+          role-to-assume: ${{ vars.AWS_BRAKET_ROLE_ARN }}
+          aws-region: us-east-1 # STS only; each Braket device entry sets its own region.
+      - name: Compile for IQM, IBM, and Amazon Braket devices
+        if: ${{ !cancelled() }} # Check IQM and IBM even if the Braket role is unavailable.
+        timeout-minutes: 30
+        env:
+          IQM_TOKEN: ${{ secrets.IQM_TOKEN }}
+          IBM_QUANTUM_API_KEY: ${{ secrets.IBM_QUANTUM_API_KEY }}
+          IBM_QUANTUM_INSTANCE_CRN: ${{ secrets.IBM_QUANTUM_INSTANCE_CRN }}
+        run: >-
+          docker run --rm -e IQM_TOKEN -e IBM_QUANTUM_API_KEY -e IBM_QUANTUM_INSTANCE_CRN
+          -e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY -e AWS_SESSION_TOKEN
+          -v "$PWD:/workspace:ro" "$IMAGE"
+          python /workspace/scripts/check_provider_targets.py
+          iqm.emerald iqm.garnet iqm.sirius
+          ibm.aachen ibm.berlin
+          amazon.braket.aqt.ibex-q1
+          amazon.braket.ionq.forte-1
+          amazon.braket.iqm.emerald amazon.braket.iqm.garnet
+          amazon.braket.rigetti.cepheus-1-108q amazon.braket.sv1

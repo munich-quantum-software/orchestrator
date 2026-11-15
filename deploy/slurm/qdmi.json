@@ -1,0 +1,19 @@
+{
+  "schema-version": 1,
+  "qdmi": {
+    "devices": [
+      { "id": "iqm.emerald", "enabled": false },
+      { "id": "iqm.garnet", "enabled": false },
+      { "id": "iqm.sirius", "enabled": false },
+      { "id": "ibm.aachen", "enabled": false },
+      { "id": "ibm.berlin", "enabled": false },
+      { "id": "amazon.braket.aqt.ibex-q1", "enabled": false },
+      { "id": "amazon.braket.ionq.forte-1", "enabled": false },
+      { "id": "amazon.braket.iqm.emerald", "enabled": false },
+      { "id": "amazon.braket.iqm.garnet", "enabled": false },
+      { "id": "amazon.braket.rigetti.cepheus-1-108q", "enabled": false },
+      { "id": "amazon.braket.sv1", "enabled": false },
+      { "id": "pasqal.emu-free", "enabled": false }
+    ]
+  }
+}

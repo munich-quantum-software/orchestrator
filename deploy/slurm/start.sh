@@ -1,0 +1,35 @@
+#!/bin/sh
+# Copyright (c) 2026 Munich Quantum Software Company GmbH
+# All rights reserved.
+#
+# SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+#
+# Licensed under the Apache License v2.0 with LLVM Exceptions.
+# See https://llvm.org/LICENSE.txt for license information.
+
+set -eu
+
+role=${1:-node}
+case "$role" in
+    controller) set -- slurmctld.service ;;
+    accounting)
+        set -- slurmdbd.service slurm-accounting.service
+        install -o slurm -g slurm -m 0600 /usr/local/share/mqt-slurm/slurmdbd.conf /etc/slurm/slurmdbd.conf
+        printf 'StoragePass=%s\n' "$(cat /run/secrets/accounting_password)" >> /etc/slurm/slurmdbd.conf
+        ;;
+    node)
+        set -- slurmd.service
+        install -D -m 0644 /usr/local/share/mqt-slurm/node.conf /etc/systemd/system/slurmd.service.d/mqt-node.conf
+        ;;
+    qan) set -- slurmd.service ;;
+    login) set -- ;;
+    *) echo "Expected controller, accounting, login, node, or qan" >&2; exit 1 ;;
+esac
+
+test -s /runtime/munge.key
+install -d -o munge -g munge -m 0755 /etc/munge /run/munge
+install -o munge -g munge -m 0400 /runtime/munge.key /etc/munge/munge.key
+install -d -o slurm -g slurm -m 0755 /var/spool/slurmctld /var/log/slurm
+install -d -o root -g root -m 0755 /var/spool/slurmd
+systemctl enable munge.service "$@"
+exec /usr/lib/systemd/systemd

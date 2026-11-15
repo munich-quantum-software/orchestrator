@@ -1,0 +1,129 @@
+# Copyright (c) 2026 Munich Quantum Software Company GmbH
+# All rights reserved.
+#
+# SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+#
+# Licensed under the Apache License v2.0 with LLVM Exceptions.
+# See https://llvm.org/LICENSE.txt for license information.
+
+[dependency-groups]
+dev = [ { include-group = "test" }, { include-group = "docs" }, { include-group = "lint" } ]
+test = [ "pytest>=9.1" ]
+docs = [
+  "furo>=2025.12.19",
+  "myst-parser>=5.1",
+  "sphinx>=9.2",
+  "sphinx-copybutton>=0.5.2",
+  "sphinx-design>=0.7",
+  "sphinxext-opengraph>=0.13",
+]
+lint = [ "fonttools>=4.68", "prek>=0.5.7", "ruff>=0.17.1", "ty>=0.0.91" ]
+native-build = [
+  "cmake>=4.4.1",
+  "nanobind>=3.1",
+  "pip>=26.2.2",
+  "scikit-build-core>=1.1.1",
+  "vcs-versioning>=2.6",
+]
+
+
+[tool.uv]
+required-version = ">=0.13.5"
+
+[tool.uv.workspace]
+members = [ "demos/qc-afqmc" ]
+
+
+[tool.ruff]
+target-version = "py314"
+line-length = 120
+extend-exclude = [ "demos/qc-afqmc/upstream" ]
+preview = true
+fix = true
+unsafe-fixes = true
+show-fixes = true
+
+[tool.ruff.format]
+preview = true
+docstring-code-format = true
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = [ "docstring-missing-exception", "docstring-missing-returns", "implicit-namespace-package", "T20" ]
+"scripts/**" = [
+  "docstring-missing-exception",
+  "implicit-namespace-package",
+  "import-outside-top-level",
+  "T20"
+]  # Native checks load their runtime inside entry functions.
+"deploy/**" = [ "implicit-namespace-package" ]
+"docs/**" = [
+  "builtin-variable-shadowing",
+  "implicit-namespace-package",
+  "T20"
+]  # Sphinx configuration names are prescribed.
+"demos/**" = [ "implicit-namespace-package" ]
+"noxfile.py" = [ "T20" ]
+
+[tool.ruff.lint.flake8-copyright]
+notice-rgx = "(?i)Copyright\\s+(?:\\(c\\)\\s+)?\\d{4}"
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[tool.ruff.lint.isort]
+known-first-party = [ "allocated_device", "qmc" ]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint]
+select = [ "ALL" ]
+ignore = [
+  "assert",                       # Use of assert detected
+  "C90",                          # <...> too complex
+  "magic-value-comparison",       # Magic value used in comparison
+  "missing-trailing-comma",       # Conflicts with formatter
+  "PLR09",                        # Too many <...>
+  "suspicious-subprocess-import", # `subprocess` module is possibly insecure
+]
+unfixable = [ "T20" ]  # Report output calls instead of deleting them.
+future-annotations = true
+
+[tool.ruff.per-file-target-version]
+"deploy/spack/**/*.py" = "py313"  # Site Spack interpreters need not match the application Python.
+
+
+[tool.pyproject-fmt]
+generate_python_version_classifiers = false
+table_format = "long"
+sub_table_spacing = "\n"
+separate_root_table = "\n\n"
+
+
+[tool.typos.default.extend-identifiers]
+imag_time_propogator = "imag_time_propogator"
+cqa_imag_time_propogator = "cqa_imag_time_propogator"
+
+[tool.typos.default.extend-words]
+braket = "braket"
+ket = "ket"
+anc = "anc"
+
+
+# Host tools are checked without installing the native deployment or its chemistry stack.
+[tool.ty.src]
+include = [
+  "scripts/branding.py",
+  "tests/slurm/run_integration.py",
+  "tests/test_*.py",
+]
+
+
+[tool.pytest]
+addopts = [ "-ra" ]
+filterwarnings = [ "error" ]
+log_level = "INFO"
+markers = [ "slurm: host-side deployment runner checks" ]
+minversion = "9.1"
+strict = true
+testpaths = [ "tests" ]

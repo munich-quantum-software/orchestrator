@@ -1,0 +1,47 @@
+/*
+ * Copyright (c) 2026 Munich Quantum Software Company GmbH
+ * All rights reserved.
+ *
+ * SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+ *
+ * Licensed under the Apache License v2.0 with LLVM Exceptions.
+ * See https://llvm.org/LICENSE.txt for license information.
+ */
+
+.workflow {
+  border: 1px solid #8db4d8;
+  border-radius: 12px;
+  padding: 1rem;
+  background: #f5f9ff;
+  color: #142b45;
+}
+.workflow svg {
+  width: 100%;
+  height: auto;
+}
+.workflow button {
+  margin: 0.4rem;
+  padding: 0.4rem 0.8rem;
+}
+.workflow .stage > g {
+  opacity: 0.4;
+  transition: opacity 0.2s;
+}
+.workflow .stage.active > g {
+  opacity: 1;
+}
+.workflow .stage.active text {
+  font-weight: bold;
+}
+@media (max-width: 600px) {
+  .workflow svg {
+    max-width: 250px;
+    display: block;
+    margin: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .workflow .stage > g {
+    transition: none;
+  }
+}

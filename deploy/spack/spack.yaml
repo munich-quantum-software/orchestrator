@@ -1,0 +1,30 @@
+# Copyright (c) 2026 Munich Quantum Software Company GmbH
+# All rights reserved.
+#
+# SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+#
+# Licensed under the Apache License v2.0 with LLVM Exceptions.
+# See https://llvm.org/LICENSE.txt for license information.
+
+spack:
+  include:
+    - path: externals.yaml
+      optional: true
+  specs:
+    - mqsc.slurm@26-11-0-0rc1 +mariadb +hwloc +pmix +cgroup sysconfdir=/etc/slurm
+    - mqsc.py-mqt-core@4.2.1 %c,cxx=llvm
+    - mqsc.py-iqm-qdmi@1.6.1 %c,cxx=llvm
+    - mqsc.py-ibm-qdmi@1.1.1 %c,cxx=llvm
+    - mqsc.py-amazon-braket-qdmi@1.4.1 %c,cxx=llvm
+    - mqsc.py-pasqal-qdmi@1.2.1 %c,cxx=llvm
+  concretizer:
+    unify: true
+  packages:
+    mqsc-mlir-sdk:
+      buildable: false
+  view: view
+  repos:
+    mqsc: ./spack_repo/mqsc
+    builtin:
+      git: https://github.com/spack/spack-packages.git
+      commit: 591701364bffe53bcb63be5aa1116408fcebbc13

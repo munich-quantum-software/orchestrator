@@ -1,0 +1,89 @@
+# Install with `uv tool install prek && prek install`; run with `uvx nox -s lint`.
+exclude: ^(brand/(mqsc\.svg|Poppins-OFL\.txt)$|demos/qc-afqmc/upstream/|docs/_static/(mqsc|orchestrator).*\.svg$)
+ci:
+  autoupdate_commit_msg: "⬆️🪝 update pre-commit hooks"
+  autoupdate_schedule: quarterly
+  autofix_commit_msg: "🎨 pre-commit fixes"
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-merge-conflict
+        args: [--assume-in-merge]
+        fail_fast: true
+        priority: 0
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-toml
+      - id: check-json
+      - id: check-added-large-files
+        args: [--maxkb=500]
+      - id: detect-private-key
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.38.2
+    hooks:
+      - id: check-github-workflows
+      - id: check-readthedocs
+  - repo: https://github.com/zizmorcore/zizmor-pre-commit
+    rev: v1.31.1
+    hooks:
+      - id: zizmor
+  - repo: https://github.com/henryiii/validate-pyproject-schema-store
+    rev: 2026.10.17
+    hooks:
+      - id: validate-pyproject
+  - repo: https://github.com/adhtruong/mirrors-typos
+    rev: v1.51.1
+    hooks:
+      - id: typos
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.13.5
+    hooks:
+      - id: uv-lock
+  - repo: https://github.com/rbubley/mirrors-prettier
+    rev: v3.9.10
+    hooks:
+      - id: prettier
+        types_or: [yaml, html, css, javascript, json, json5]
+  - repo: https://github.com/rvben/rumdl-pre-commit
+    rev: v0.3.0
+    hooks:
+      - id: rumdl
+        args: [--fix]
+      - id: rumdl-fmt
+  - repo: https://github.com/tox-dev/pyproject-fmt
+    rev: v2.30.3
+    hooks:
+      - id: pyproject-fmt
+        priority: 5
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.17.1
+    hooks:
+      - id: ruff-check
+        require_serial: true
+        priority: 6
+      - id: ruff-format
+        priority: 8
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.11.0.1
+    hooks:
+      - id: shellcheck
+  - repo: https://github.com/astral-sh/ty-pre-commit
+    rev: v0.0.91
+    hooks:
+      - id: ty
+        # uv check skips virtual workspace roots; check the repository tools explicitly.
+        entry: uv run --locked --only-group dev ty check
+        priority: 9
+  - repo: https://github.com/emzeat/mz-lictools
+    rev: v2.9.0
+    hooks:
+      - id: license-tools
+        priority: 4
+  - repo: local
+    hooks:
+      - id: disallow-caps
+        name: Disallow improper capitalization
+        language: pygrep
+        entry: \b(Mqsc|Mqt|Iqm|Ibm|Numpy|Cmake|Github|PyTest)\b
+        exclude: ^\.pre-commit-config\.yaml$
