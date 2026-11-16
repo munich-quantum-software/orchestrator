@@ -1,4 +1,5 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/munich-quantum-software/orchestrator/ci.yml?branch=main&style=flat-square&label=ci)](https://github.com/munich-quantum-software/orchestrator/actions/workflows/ci.yml)
+[![Documentation](https://img.shields.io/readthedocs/mqsc-orchestrator?logo=readthedocs&style=flat-square)](https://mqsc-orchestrator.readthedocs.io/en/latest/)
 ![Platform](https://img.shields.io/badge/deployment-Linux-blue?style=flat-square)
 [![License](https://img.shields.io/badge/license-Apache--2.0%20WITH%20LLVM--exception-blue?style=flat-square)](LICENSE)
 
@@ -30,12 +31,18 @@ and results visible at every step. This is an integration of the MQSC stack,
 with deployment, accounting, and reproducible checks in one place. HRES remains
 a pinned upstream development interface.
 
+<p align="center">
+  <a href="https://mqsc-orchestrator.readthedocs.io/en/latest/">
+  <img width=30% src="https://img.shields.io/badge/documentation-blue?style=for-the-badge&logo=read%20the%20docs" alt="Documentation" />
+  </a>
+</p>
+
 ## Start locally
 
 Use a Linux Docker engine with cgroup v2, rootful privileged containers, and
 Docker Compose. On Apple Silicon, use Docker Desktop’s native Linux ARM64 VM
 following the
-[macOS setup](docs/deployment.md#apple-silicon-development-and-demonstrations).
+[macOS setup](https://mqsc-orchestrator.readthedocs.io/en/latest/deployment.html#apple-silicon-development-and-demonstrations).
 Allocate at least 8 CPUs and 24 GiB RAM for the compiler build and scientific
 environment. The containers share host resources; they are not a multi-tenant
 security boundary.
@@ -65,20 +72,22 @@ removes only its own test cluster.
 
 ## Documentation
 
-```bash
-uvx nox -s docs
-```
-
-The site is written to `build/docs`. Start with
-[deployment](docs/deployment.md), [architecture](docs/architecture.md),
-[QC-AFQMC](docs/afqmc.md), [providers](docs/providers.md), and
-[validation](docs/validation.md).
+Explore the
+[documentation](https://mqsc-orchestrator.readthedocs.io/en/latest/), starting
+with
+[deployment](https://mqsc-orchestrator.readthedocs.io/en/latest/deployment.html),
+[architecture](https://mqsc-orchestrator.readthedocs.io/en/latest/architecture.html),
+[QC-AFQMC](https://mqsc-orchestrator.readthedocs.io/en/latest/afqmc.html),
+[providers](https://mqsc-orchestrator.readthedocs.io/en/latest/providers.html),
+and
+[validation](https://mqsc-orchestrator.readthedocs.io/en/latest/validation.html).
 
 ## Contributing
 
-The [development guide](docs/development.md) covers uv, pre-commit, tests, and
-documentation. [CHANGELOG.md](CHANGELOG.md) records changes and human
-contributors.
+The
+[development guide](https://mqsc-orchestrator.readthedocs.io/en/latest/development.html)
+covers uv, pre-commit, tests, and documentation. [CHANGELOG.md](CHANGELOG.md)
+records changes and human contributors.
 
 ## License
 
