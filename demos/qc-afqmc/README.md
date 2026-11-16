@@ -5,9 +5,9 @@ QDMI, compiler-backed PennyLane execution, classical walkers, and MPI
 continuation.
 
 Run it in the shared MQSC Orchestrator environment. See
-[the executable showcase](../../docs/afqmc.md) for dependent Slurm jobs,
-workloads, and scientific limits. The `--smoke` workload validates integration,
-not convergence.
+[the executable showcase](https://mqsc-orchestrator.readthedocs.io/en/latest/afqmc.html)
+for dependent Slurm jobs, workloads, and scientific limits. The `--smoke`
+workload validates integration, not convergence.
 
 `run.py --stage measure` samples the trial-state shadows on the allocated device
 and saves `measurements.json`. `run.py --stage propagate` reconstructs the trial

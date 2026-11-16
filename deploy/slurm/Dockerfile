@@ -38,8 +38,9 @@ RUN apt-get update \
         libglib2.0-dev liblz4-dev zlib1g-dev libdbus-1-dev libhwloc-dev libjson-c-dev \
         liblua5.4-dev libmariadb-dev libmunge-dev libpam0g-dev libpmix-dev libreadline-dev libyaml-dev \
     && rm -rf /var/lib/apt/lists/*
-RUN git clone https://github.com/spack/spack.git /opt/spack \
-    && git -C /opt/spack checkout 2ad33296baf6392fb183dd49f1ebffa1e0b9c1ec
+RUN git init -q /opt/spack \
+    && git -C /opt/spack fetch -q --depth 1 https://github.com/spack/spack.git 2ad33296baf6392fb183dd49f1ebffa1e0b9c1ec \
+    && git -C /opt/spack checkout -q FETCH_HEAD
 ENV PATH=/opt/spack/bin:$PATH SPACK_USER_CONFIG_PATH=/opt/spack-config
 RUN mkdir -p /tmp/setup-mlir \
     && curl -fLsS https://github.com/munich-quantum-software/setup-mlir/archive/246aa0c70414109aa55fa19a5370739519833512.tar.gz \
