@@ -15,8 +15,6 @@ extensions = [
     "myst_parser",
     "sphinx_copybutton",
     "sphinx_design",
-    "sphinx.ext.intersphinx",
-    "sphinx.ext.extlinks",
     "sphinxext.opengraph",
 ]
 html_theme = "furo"
@@ -46,4 +44,3 @@ nitpicky = True
 
 html_baseurl = "https://mqsc-orchestrator.readthedocs.io/en/latest/"
 ogp_site_url = html_baseurl
-extlinks = {"issue": ("https://github.com/munich-quantum-software/orchestrator/issues/%s", "#%s")}

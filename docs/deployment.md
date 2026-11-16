@@ -34,7 +34,7 @@ active. `resources.yaml` defines HRES membership, counts, and the QDMI
 maintenance callback.
 
 ```bash
-srun --partition=quantum --licenses=mqt.ddsim.default:1 python /workspace/scripts/check_workflows.py --output /jobs/workflows
+srun --partition=quantum --licenses=mqt.ddsim.default:1 python /workspace/scripts/check_workflows.py
 ```
 
 ## Apple Silicon development and demonstrations

@@ -2,4 +2,4 @@
 
 Thank you for your interest in contributing to the MQSC Orchestrator! An
 extensive contribution guide is available in our
-[development guide](../docs/development.md).
+[development guide](https://mqsc-orchestrator.readthedocs.io/en/latest/development.html).
