@@ -166,6 +166,12 @@ def node_record(node: str) -> str:
     return controller("scontrol", "show", "node", node, "--oneliner").stdout.strip()
 
 
+def node_layers(node: str) -> set[tuple[str, str]]:
+    """Return the HRES layers that contain a node."""
+    (record,) = json.loads(controller("scontrol", "--json", "show", "node", node).stdout)["nodes"]
+    return {(layer["hres_name"], layer["layer_name"]) for layer in record.get("hres", [])}
+
+
 def node_is_idle(node: str, cpus: int, memory: int) -> bool:
     """Return whether a compute node has registered and is idle."""
     record = node_record(node)
@@ -379,13 +385,12 @@ def test_core() -> None:
             in controller("journalctl", "--no-pager", "--unit", "slurmctld.service").stdout
         ),
     )
-    for license_name in ("mqt.ddsim.default", "mqt.sc.default"):
+    # Every configured HRES keeps its single quantum layer on both QANs.
+    expected_layers = {(name, "quantum") for name in ("mqt.ddsim.default", "mqt.sc.default", *PROVIDER_DEVICES)}
+    for qan in QANS:
         wait_for(
-            f"{license_name} to retain its QAN membership after reconfiguration",
-            lambda license_name=license_name: (
-                set(controller("scontrol", "show", "hostnames", license_record(license_name)["Nodes"]).stdout.split())
-                == set(QANS)
-            ),
+            f"{qan} to retain every HRES layer after reconfiguration",
+            lambda qan=qan: node_layers(qan) == expected_layers,
         )
     wait_for("the unaffected SC layer to recover", lambda: license_record("mqt.sc.default")["DisableLayer"] == "false")
     assert_license("mqt.ddsim.default", total=2, used=2, free=0)

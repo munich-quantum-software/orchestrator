@@ -5,7 +5,8 @@ what completed allocations consumed. Use them together with the application's
 saved artifacts to follow a calculation from submission to its result. These are
 local scheduler observations, not remote QPU utilization or billable time.
 
-Inspect `scontrol show licenses` for `DisableHRES` and `DisableLayer`. The
+Inspect `scontrol show licenses` for `DisableHRES` and `DisableLayer`, and
+`scontrol -d show node qan1` for the HRES layers that contain a QAN. The
 controller logs each change in a device's admission with a fixed reason, for
 example `hres_qdmi: amazon.braket.sv1 admission closed: unavailable`:
 
