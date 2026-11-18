@@ -13,10 +13,10 @@ from spack_repo.builtin.packages.slurm.package import Slurm as BaseSlurm
 
 
 class Slurm(BaseSlurm):
-    """Slurm 26.11.0rc1, the first release with the HRES Lua plugin."""
+    """Slurm 26.11.0rc2 with the HRES Lua plugin and per-node layer reporting."""
 
     git = "https://github.com/SchedMD/slurm.git"
-    version("26-11-0-0rc1", commit="a202eca2bfaf2f17f945fa73b185a542bcc54d6a")
+    version("26-11-0-0rc2", commit="fbf7660a8b670013743724fb4dad25e5fb1de2cd")
     depends_on("lua@5.4:")
     depends_on("libyaml")
 
