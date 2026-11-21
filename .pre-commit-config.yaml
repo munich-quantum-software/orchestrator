@@ -26,15 +26,15 @@ repos:
       - id: check-github-workflows
       - id: check-readthedocs
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
-    rev: v1.31.1
+    rev: v1.32.0
     hooks:
       - id: zizmor
   - repo: https://github.com/henryiii/validate-pyproject-schema-store
-    rev: 2026.10.17
+    rev: 2026.11.13
     hooks:
       - id: validate-pyproject
   - repo: https://github.com/adhtruong/mirrors-typos
-    rev: v1.51.1
+    rev: v1.52.2
     hooks:
       - id: typos
   - repo: https://github.com/astral-sh/uv-pre-commit
@@ -42,7 +42,7 @@ repos:
     hooks:
       - id: uv-lock
   - repo: https://github.com/rbubley/mirrors-prettier
-    rev: v3.9.10
+    rev: v3.10.1
     hooks:
       - id: prettier
         types_or: [yaml, html, css, javascript, json, json5]
@@ -77,7 +77,7 @@ repos:
         entry: uv run --locked --only-group dev ty check
         priority: 9
   - repo: https://github.com/emzeat/mz-lictools
-    rev: v2.9.0
+    rev: v2.10.0
     hooks:
       - id: license-tools
         priority: 4
