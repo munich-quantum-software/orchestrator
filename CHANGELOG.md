@@ -7,10 +7,10 @@ This project adheres to [Semantic Versioning].
 
 ## Unreleased
 
-- Build native packages in the amd64 Slurm image for baseline x86-64 so the
-  cached image can run on hosts with different CPU features.
-  ([5d5539f](https://github.com/munich-quantum-software/orchestrator/commit/5d5539f212ff7b1ae955a79ae3c62519ea00227e),
-  [**@burgholzer**])
+### Fixed
+
+- 🐛 Prevent illegal-instruction crashes when reusing the amd64 Slurm image
+  across CPU generations. ([#14]) ([**@burgholzer**])
 
 ## [0.1.0] - 2026-11-16
 
@@ -20,6 +20,10 @@ This project adheres to [Semantic Versioning].
 <!-- Version links -->
 
 [0.1.0]: https://github.com/munich-quantum-software/orchestrator/releases/tag/v0.1.0
+
+<!-- PR links -->
+
+[#14]: https://github.com/munich-quantum-software/orchestrator/pull/14
 
 <!-- Contributor -->
 
