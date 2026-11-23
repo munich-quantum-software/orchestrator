@@ -54,8 +54,9 @@ x-qan: &qan
 
 services:
   database:
-    image: mariadb:12.3
+    image: mariadb:13.0
     environment:
+      MARIADB_AUTO_UPGRADE: "1"
       MARIADB_DATABASE: slurm_acct_db
       MARIADB_USER: slurm
       MARIADB_PASSWORD_FILE: /run/secrets/accounting_password

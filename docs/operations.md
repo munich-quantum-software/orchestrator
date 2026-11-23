@@ -62,8 +62,10 @@ perimeter.
 Before upgrades, drain quantum resources and wait for or reconcile outstanding
 remote jobs. Back up the accounting database with its supported consistent
 backup procedure, controller state, configuration, component pins, and
-application artifacts. Restore to an isolated cluster and verify accounting
-continuity and resource discovery before reopening admission. Keep the matching
-old images and configuration for rollback; never roll back a changed database
-schema without a compatible database restore. A backup that has not passed
-restoration testing is not release evidence.
+application artifacts. The Compose database upgrades MariaDB system tables on
+startup when its accounting volume comes from an older release. Restore to an
+isolated cluster and verify accounting continuity and resource discovery before
+reopening admission. Keep the matching old images and configuration for
+rollback; never roll back a changed database schema without a compatible
+database restore. A backup that has not passed restoration testing is not
+release evidence.

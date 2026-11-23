@@ -7,6 +7,11 @@ This project adheres to [Semantic Versioning].
 
 ## Unreleased
 
+### Changed
+
+- ⬆️ Run Slurm accounting on MariaDB 13.0 and upgrade system tables when reusing
+  an accounting volume. ([#10]) ([**@burgholzer**])
+
 ### Fixed
 
 - 🐛 Prevent illegal-instruction crashes when reusing the amd64 Slurm image
@@ -24,6 +29,7 @@ This project adheres to [Semantic Versioning].
 <!-- PR links -->
 
 [#14]: https://github.com/munich-quantum-software/orchestrator/pull/14
+[#10]: https://github.com/munich-quantum-software/orchestrator/pull/10
 
 <!-- Contributor -->
 
