@@ -24,6 +24,7 @@ repos:
     rev: 0.39.0
     hooks:
       - id: check-github-workflows
+      - id: check-compose-spec
       - id: check-readthedocs
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
     rev: v1.32.0
