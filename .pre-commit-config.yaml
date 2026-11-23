@@ -21,9 +21,10 @@ repos:
         args: [--maxkb=500]
       - id: detect-private-key
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.38.2
+    rev: 0.39.0
     hooks:
       - id: check-github-workflows
+      - id: check-compose-spec
       - id: check-readthedocs
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
     rev: v1.32.0
