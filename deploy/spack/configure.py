@@ -11,6 +11,7 @@
 from __future__ import annotations
 
 import json
+import platform
 import subprocess
 import sys
 from importlib.metadata import version
@@ -29,6 +30,9 @@ packages = {
     },
     "mqsc-mlir-sdk": {"buildable": False, "externals": [{"spec": "mqsc-mlir-sdk@23.1.4", "prefix": "/opt/llvm"}]},
 }
+if platform.machine() == "x86_64":
+    # Cached amd64 image layers run on hosts with different CPU features.
+    packages["all"] = {"require": ["target=x86_64"]}
 for name in ("pip", "scikit-build-core", "nanobind", "vcs-versioning"):
     packages["py-" + name] = {
         "buildable": False,
