@@ -14,6 +14,10 @@ This project adheres to [Semantic Versioning].
 
 ### Fixed
 
+- 🐛 Fix compilation for paused Amazon Braket devices and for IQM Garnet when
+  its topology exposes fewer qubits than advertised. The deployment uses Amazon
+  Braket QDMI 1.4.3 and AWS SDK for C++ 1.11.936. ([Braket #320], [Braket #327])
+  ([**@burgholzer**])
 - 🐛 Prevent illegal-instruction crashes when reusing the amd64 Slurm image
   across CPU generations. ([#14]) ([**@burgholzer**])
 
@@ -28,6 +32,8 @@ This project adheres to [Semantic Versioning].
 
 <!-- PR links -->
 
+[Braket #327]: https://github.com/munich-quantum-software/amazon-braket-qdmi-device/pull/327
+[Braket #320]: https://github.com/munich-quantum-software/amazon-braket-qdmi-device/pull/320
 [#14]: https://github.com/munich-quantum-software/orchestrator/pull/14
 [#10]: https://github.com/munich-quantum-software/orchestrator/pull/10
 

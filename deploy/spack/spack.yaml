@@ -15,7 +15,7 @@ spack:
     - mqsc.py-mqt-core@4.2.1 %c,cxx=llvm
     - mqsc.py-iqm-qdmi@1.6.1 %c,cxx=llvm
     - mqsc.py-ibm-qdmi@1.1.1 %c,cxx=llvm
-    - mqsc.py-amazon-braket-qdmi@1.4.1 %c,cxx=llvm
+    - mqsc.py-amazon-braket-qdmi@1.4.3 %c,cxx=llvm
     - mqsc.py-pasqal-qdmi@1.2.1 %c,cxx=llvm
   concretizer:
     unify: true

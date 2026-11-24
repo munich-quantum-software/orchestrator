@@ -19,13 +19,13 @@ class PyAmazonBraketQdmi(PythonPackage):
 
     homepage = "https://github.com/munich-quantum-software/amazon-braket-qdmi-device"
     git = homepage + ".git"
-    version("1.4.1", commit="f450e29fa69ee81e7a16e227b73ae73651bb3543")
+    version("1.4.3", commit="68b75677e7aad760b3a96d5f503f0638945c56b3")
     depends_on("py-mqt-core@4.2.1:", type="run")
     depends_on("py-scikit-build-core@1.1:", type="build")
     depends_on("py-vcs-versioning@2.3:", type="build")
     depends_on("cmake@3.28:", type="build")
     depends_on("ninja", type="build")
-    depends_on("aws-sdk-cpp@1.11.908", type=("build", "link"))
+    depends_on("aws-sdk-cpp@1.11.936", type=("build", "link"))
     depends_on("curl", type=("build", "link"))
     depends_on("openssl", type=("build", "link"))
     depends_on("zlib-api", type=("build", "link"))
