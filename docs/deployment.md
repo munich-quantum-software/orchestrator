@@ -100,8 +100,8 @@ still determine authorization.
 
 ## Existing clusters
 
-Build the pinned HRES-capable Slurm revision with Lua support. Install the
-shared Core/provider environment on QANs, the Lua callback and bounded QDMI
+Build Slurm 26.11.0 with Lua support using the supplied Spack recipe. Install
+the shared Core/provider environment on QANs, the Lua callback and bounded QDMI
 probe on the controller, and register devices in `resources.yaml`. Adapt node
 names, partitions, accounts, and resource counts to site policy. Add matching
 accounting TRES and validate with the supplied acceptance scenarios.
@@ -111,9 +111,8 @@ it on probe failure or timeout, logging each change with a fixed reason; see
 [operations](operations.md). Running allocations retain their resources.
 Controller probe credentials and user job credentials are independent.
 
-HRES is a development interface pinned in the Slurm Spack recipe. Upgrade it
-deliberately and rerun outage, recovery, capacity, placement, and accounting
-checks.
+When upgrading Slurm, rerun the outage, recovery, capacity, placement, and
+accounting checks described in [validation](validation.md).
 
 ## Configuration and credentials
 
