@@ -17,8 +17,8 @@ This project adheres to [Semantic Versioning].
 - 🐛 Fix compilation for paused Amazon Braket devices and for IQM Garnet when
   its topology exposes fewer qubits than advertised. The deployment uses Amazon
   Braket QDMI 1.4.3 and AWS SDK for C++ 1.11.936. ([#15]) ([**@burgholzer**])
-- 🐛 Prevent illegal-instruction crashes when reusing the amd64 Slurm image
-  across CPU generations. ([#14]) ([**@burgholzer**])
+- 🐛 Build Slurm and MQT Core for baseline x86-64 so the amd64 image can run on
+  workers with different CPU features. ([#14], [#15]) ([**@burgholzer**])
 
 ## [0.1.0] - 2026-11-16
 
