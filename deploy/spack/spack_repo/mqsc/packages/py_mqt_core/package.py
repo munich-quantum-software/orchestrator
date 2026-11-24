@@ -38,7 +38,7 @@ class PyMqtCore(PythonPackage):
     @override
     def config_settings(self, _spec: object, _prefix: object) -> dict[str, str]:
         """Return upstream build settings for the deployment wheel."""
-        return {"cmake.define.ENABLE_IPO": "ON", "cmake.define.CMAKE_LINKER_TYPE": "LLD"}
+        return {"cmake.define.DEPLOY": "ON", "cmake.define.ENABLE_IPO": "ON", "cmake.define.CMAKE_LINKER_TYPE": "LLD"}
 
     def setup_build_environment(self, env: EnvironmentModifications) -> None:
         """Select the compiler SDK from this concrete environment."""

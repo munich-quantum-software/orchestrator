@@ -23,7 +23,7 @@ class AwsSdkCpp(CMakePackage):
     homepage = "https://github.com/aws/aws-sdk-cpp"
     git = homepage + ".git"
     # The version the Amazon Braket QDMI device would otherwise fetch.
-    version("1.11.908", tag="1.11.908", commit="765f3eec667c66643522a37278e7920e48b0b821", submodules=True)
+    version("1.11.936", tag="1.11.936", commit="124e4c4b4f0bd05e0500b6ffb517353d831a42ab", submodules=True)
     generator("ninja")
     depends_on("cmake@3.24:", type="build")
     depends_on("ninja", type="build")
