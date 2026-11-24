@@ -626,9 +626,11 @@ def main() -> None:
         testing_at = time.monotonic()
 
         version_output = controller("scontrol", "--version").stdout.strip()
-        version_match = re.search(r"^slurm(?:-wlm)?\s+(\d+)\.(\d+)\b", version_output, flags=re.IGNORECASE)
+        version_match = re.fullmatch(
+            r"slurm(?:-wlm)?\s+(\d+)\.(\d+)\.\d+(?:-\d+)?", version_output, flags=re.IGNORECASE
+        )
         if version_match is None or tuple(map(int, version_match.groups())) < (26, 11):
-            msg = f"The fixture requires Slurm 26.11 or newer, got {version_output!r}"
+            msg = f"The fixture requires a Slurm release of 26.11.0 or newer, got {version_output!r}"
             raise RuntimeError(msg)
 
         for partition, nodes, cpus, memory in (("compute", NODES, 2, 2048), ("quantum", QANS, 4, 8192)):

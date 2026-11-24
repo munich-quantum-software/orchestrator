@@ -20,16 +20,15 @@ turn those measurements into a scientific result. The MQSC Orchestrator brings
 these stages together in a deployable reference system.
 
 Write applications in Qiskit or PennyLane, compile with the MQT Compiler
-Collection, and reach devices through QDMI. Slurm coordinates the work using its
-emerging HRES resource model. Our main showcase, **QC-AFQMC**, follows this
-journey from a small molecular problem to quantum measurements and distributed
-classical propagation.
+Collection, and reach devices through QDMI. Slurm 26.11.0 schedules access to
+quantum devices through hierarchical resources (HRES). Our main showcase,
+**QC-AFQMC**, follows this journey from a small molecular problem to quantum
+measurements and distributed classical propagation.
 
 Start with DDSIM and explore the whole workflow without a cloud account. Connect
 hardware when you are ready, keeping the compilation target, execution device,
 and results visible at every step. This is an integration of the MQSC stack,
-with deployment, accounting, and reproducible checks in one place. HRES remains
-a pinned upstream development interface.
+with deployment, accounting, and reproducible checks in one place.
 
 <p align="center">
   <a href="https://mqsc-orchestrator.readthedocs.io/en/latest/">

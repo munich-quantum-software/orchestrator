@@ -32,13 +32,14 @@ postprocessing succeeded.
 
 ## HRES integration and upgrades
 
-[HRES is an upstream beta interface](https://slurm.schedmd.com/hres.html).
-The source revision is pinned because callback and state formats can change. The
-reference callback probes each configured QDMI device within a time bound, every
-30 seconds for local devices and every three minutes for remote ones, and
-updates local admission; Slurm owns allocation and accounting. No second
-scheduler maintains a competing allocation ledger. Preserve provider identity
-from admission through compilation and submission.
+SchedMD classifies [HRES](https://slurm.schedmd.com/hres.html) as a beta feature
+in Slurm 26.11.0. Check the Slurm release notes for changes to `resources.yaml`
+and the Lua callbacks before upgrading. The reference callback probes each
+configured QDMI device within a time bound, every 30 seconds for local devices
+and every three minutes for remote ones, and updates local admission; Slurm owns
+allocation and accounting. No second scheduler maintains a competing allocation
+ledger. Preserve provider identity from admission through compilation and
+submission.
 
 Treat every Slurm/Core/provider update as an integration change. Re-run
 discovery, capacity exhaustion, independent-device admission, unavailable-device
