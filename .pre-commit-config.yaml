@@ -31,7 +31,7 @@ repos:
     hooks:
       - id: zizmor
   - repo: https://github.com/henryiii/validate-pyproject-schema-store
-    rev: 2026.11.14
+    rev: 2026.11.20
     hooks:
       - id: validate-pyproject
   - repo: https://github.com/adhtruong/mirrors-typos
@@ -39,7 +39,7 @@ repos:
     hooks:
       - id: typos
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.13.8
+    rev: 0.13.9
     hooks:
       - id: uv-lock
   - repo: https://github.com/rbubley/mirrors-prettier
@@ -48,7 +48,7 @@ repos:
       - id: prettier
         types_or: [yaml, html, css, javascript, json, json5]
   - repo: https://github.com/rvben/rumdl-pre-commit
-    rev: v0.3.4
+    rev: v0.3.5
     hooks:
       - id: rumdl
         args: [--fix]
@@ -59,7 +59,7 @@ repos:
       - id: pyproject-fmt
         priority: 5
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.17.5
+    rev: v0.17.6
     hooks:
       - id: ruff-check
         require_serial: true
@@ -71,7 +71,7 @@ repos:
     hooks:
       - id: shellcheck
   - repo: https://github.com/astral-sh/ty-pre-commit
-    rev: v0.0.104
+    rev: v0.0.107
     hooks:
       - id: ty
         # uv check skips virtual workspace roots; check the repository tools explicitly.
